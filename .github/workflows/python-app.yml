@@ -36,4 +36,11 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Run Unit Tests
       run: |
-          python -m unittest discover -s Breadcrumbstwo-tier-flask-app-cicd
+        python -m pytest
+    - name: Deploy to Heroku
+      if: success()
+      uses: two-tier-flask-app-cicd@v3.12.12
+      with:
+        heroku_api_key: ${{ secrets.HRKU-05710f83-9cd6-412c-b80e-00c63fedfff6 }}  # Add your Heroku API key as a secret
+        heroku_app_name: 'ujawal0011@gmail.com'  # Replace with your Heroku app name
+        heroku_email: 'ujawal0011@gmail.com'  # Replace with your Heroku account email
